@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | FAQ Accordion Card</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .q1:checked~.ans {
+      display: block;
+    }
+
+    .q1:checked~.question>.arrow-box>.question-arrow {
+      transform: rotate(180deg);
+    }
+
+    .q1:checked~.question {
+      font-weight: bolder;
+    }
+  </style>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="antialiased text-gray-900 bg-gradient-to-b from-violet-300 to-blue-700">
+  <div class="flex items-center justify-center min-h-screen px-8 py-32 md:py-0">
+    <div class="flex flex-col max-w-4xl bg-white md:flex-row rounded-xl">
+      <div class="relative mx-auto md:hidden md:w-1/2">
+          <img class="object-contain w-64 h-64 -ml-6 -mt-36" src="./images/illustration-woman-online-mobile.svg"
+            alt="woman online mobile image">
+              <img class="absolute -top-4 left-2" src="./images/bg-pattern-mobile.svg" alt="background pattern mobile">
+      </div>
+
+      <div class="relative hidden md:block md:w-1/2">
+        <div class="relative w-full h-full overflow-hidden">
+            <img class="absolute -bottom-14 -left-32" src="./images/bg-pattern-desktop.svg" alt="background pattern desktop">
+            <img class="object-contain w-full h-64 -ml-20 mt-36" src="./images/illustration-woman-online-desktop.svg"
+              alt="woman online desktop image">
+        </div>
+        <img class="absolute overflow-visible top-56 -left-24" src="./images/illustration-box-desktop.svg" alt="at box image">
+      </div>
+      <div class="w-full px-12 py-8 md:px-0 md:pr-12 md:pb-14 md:w-1/2">
+        <h3 class="py-4 text-4xl font-bold text-center md:text-left">FAQ</h3>
+        <div class="py-4 border-b-2">
+          <label for="q1">
+            <input class="hidden q1" id="q1" checked name="question" type="radio" >
+            <div class="flex items-center justify-between question">
+              <div>
+                How many team members can I invite?
+              </div>
+              <div class="arrow-box">
+                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
+              </div>
+            </div>
+            <p class="hidden py-2 text-gray-500 ans">
+              You can invite up to 2 additional users on the Free plan. There is no limit on
+              team members for the Premium plan.
+            </p>
+          </label>
+        </div>
+        <div class="py-4 border-b-2">
+          <label >
+            <input class="hidden q1" name="question" type="radio" >
+            <div class="flex items-center justify-between question">
+              <div>
+                What is the maximum file upload size?
+              </div>
+              <div class="arrow-box">
+                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
+              </div>
+            </div>
+            <p class="hidden py-2 text-gray-500 ans">
+              No more than 2GB. All files in your account must fit your allotted storage space.
+            </p>
+          </label>
+        </div>
+        <div class="py-4 border-b-2">
+          <label>
+            <input class="hidden q1" name="question" type="radio" >
+            <div class="flex items-center justify-between question">
+              <div>
+                How do I reset my password?
+              </div>
+              <div class="arrow-box">
+                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
+              </div>
+            </div>
+            <p class="hidden py-2 text-gray-500 ans">
+              Click “Forgot password” from the login page or “Change password” from your profile page.
+              A reset link will be emailed to you.
+            </p>
+          </label>
+        </div>
+        <div class="py-4 border-b-2">
+          <label>
+            <input class="hidden q1" name="question" type="radio" >
+            <div class="flex items-center justify-between question">
+              <div>
+                Can I cancel my subscription?
+              </div>
+              <div class="arrow-box">
+                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
+              </div>
+            </div>
+            <p class="hidden py-2 text-gray-500 ans">
+              Yes! Send us a message and we’ll process your request no questions asked.
+            </p>
+          </label>
+        </div>
+        <div class="py-4 border-b-2">
+          <label>
+            <input class="hidden q1" name="question" type="radio" >
+            <div class="flex items-center justify-between question">
+              <div>
+                Do you provide additional support?
+              </div>
+              <div class="arrow-box">
+                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
+              </div>
+            </div>
+            <p class="hidden py-2 text-gray-500 ans">
+              Chat and email support is available 24/7. Phone lines are open during normal business hours.
+            </p>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center text-gray-300">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="https://www.frontendmentor.io/profile/sagarkaurav">Sagar Kaurav</a>.
+    <a href="https://github.com/sagarkaurav">Github</a>
+  </div>
+</body>
+
+</html>

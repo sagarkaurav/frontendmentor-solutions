@@ -12,17 +12,23 @@
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .q1:checked~.ans {
+    label > span {
+      content: url('./images/icon-arrow-down.svg');
+      float: right;
+    }
+    .question-checkbox:checked~.ans {
       display: block;
     }
-
-    .q1:checked~.question>.arrow-box>.question-arrow {
-      transform: rotate(180deg);
-    }
-
-    .q1:checked~.question {
+    .question-checkbox:checked ~ label {
       font-weight: bolder;
     }
+    .question-checkbox:checked ~ label > span {
+      transform: rotate(180deg);
+    }
+    /* .q1:checked ~ label {
+      font-weight: bolder;
+      transform: rotate(180deg);
+    } */
   </style>
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -47,86 +53,56 @@
       <div class="w-full px-12 py-8 md:px-0 md:pr-12 md:pb-14 md:w-1/2">
         <h3 class="py-4 text-4xl font-bold text-center md:text-left">FAQ</h3>
         <div class="py-4 border-b-2">
-          <label class="block">
-            <input class="hidden q1" checked name="question" type="radio" >
-            <div class="flex items-center justify-between question">
-              <div>
-                How many team members can I invite?
-              </div>
-              <div class="arrow-box">
-                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
-              </div>
-            </div>
+          <input class="hidden question-checkbox" id="q1" checked name="question" type="radio" >
+          <label for="q1">
+            How many team members can I invite?
+            <span></span>
+          </label>
             <p class="hidden py-2 text-gray-500 ans">
               You can invite up to 2 additional users on the Free plan. There is no limit on
               team members for the Premium plan.
             </p>
-          </label>
         </div>
         <div class="py-4 border-b-2">
-          <label >
-            <input class="hidden q1" name="question" type="radio" >
-            <div class="flex items-center justify-between question">
-              <div>
-                What is the maximum file upload size?
-              </div>
-              <div class="arrow-box">
-                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
-              </div>
-            </div>
+          <input class="hidden question-checkbox" id="q2" name="question" type="radio" >
+          <label for="q2">
+            What is the maximum file upload size?
+            <span></span>
+          </label>
             <p class="hidden py-2 text-gray-500 ans">
               No more than 2GB. All files in your account must fit your allotted storage space.
             </p>
-          </label>
         </div>
         <div class="py-4 border-b-2">
-          <label class="block">
-            <input class="hidden q1" name="question" type="radio" >
-            <div class="flex items-center justify-between question">
-              <div>
-                How do I reset my password?
-              </div>
-              <div class="arrow-box">
-                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
-              </div>
-            </div>
+          <input class="hidden question-checkbox" id="q3" name="question" type="radio" >
+          <label class="label-icon" for="q3">
+            How do I reset my password?
+            <span></span>
+          </label>
             <p class="hidden py-2 text-gray-500 ans">
               Click “Forgot password” from the login page or “Change password” from your profile page.
               A reset link will be emailed to you.
             </p>
-          </label>
         </div>
         <div class="py-4 border-b-2">
-          <label class="block">
-            <input class="hidden q1" name="question" type="radio" >
-            <div class="flex items-center justify-between question">
-              <div>
-                Can I cancel my subscription?
-              </div>
-              <div class="arrow-box">
-                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
-              </div>
-            </div>
+          <input class="hidden question-checkbox" id="q4" name="question" type="radio" >
+          <label for="q4">
+            Can I cancel my subscription?
+            <span></span>
+          </label>
             <p class="hidden py-2 text-gray-500 ans">
               Yes! Send us a message and we’ll process your request no questions asked.
             </p>
-          </label>
         </div>
         <div class="py-4 border-b-2">
-          <label class="block">
-            <input class="hidden q1" name="question" type="radio" >
-            <div class="flex items-center justify-between question">
-              <div>
-                Do you provide additional support?
-              </div>
-              <div class="arrow-box">
-                <img class="question-arrow" src="./images/icon-arrow-down.svg" alt="question arrow">
-              </div>
-            </div>
+          <input class="hidden question-checkbox" id="q5" name="question" type="radio" >
+          <label for="q5">
+            Do you provide additional support?
+            <span></span>
+          </label>
             <p class="hidden py-2 text-gray-500 ans">
               Chat and email support is available 24/7. Phone lines are open during normal business hours.
             </p>
-          </label>
         </div>
       </div>
     </div>

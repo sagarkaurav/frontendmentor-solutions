@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    @variants responsive {
+        .background-desktop {
+            background: url('/images/bg-desktop.svg') no-repeat;
+          }
+    }
+    .background-mobile {
+        background: url('/images/bg-mobile.svg') no-repeat;
+      }
+}

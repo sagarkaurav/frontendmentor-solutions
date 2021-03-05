@@ -71,13 +71,13 @@
   </script>
   <div x-data="gameBoard()" class="relative min-h-screen text-gray-200 bg-board">
     <div class="flex flex-col items-center px-4 py-8 md:px-24">
-      <div class="flex justify-between w-full max-w-2xl px-12 py-4 border-2 border-gray-400 rounded-lg">
+      <div class="flex justify-between w-full max-w-2xl py-4 border-2 border-gray-400 rounded-lg md:px-12">
         <img x-show="mode=='normal'" src="/images/logo.svg" alt="logo">
         <img x-show="mode=='hardcore'" src="/images/logo-bonus.svg" alt="logo">
         <div>
           <button @click="mode = mode == 'normal' ? 'hardcore': 'normal' ">
-            <span x-show="mode == 'hardcore'">Switch to normal Mode</span>
-            <span x-show="mode == 'normal'">Switch to hardcore Mode</span>
+            <span x-show="mode == 'hardcore'">normal Mode</span>
+            <span x-show="mode == 'normal'">hardcore Mode</span>
           </button>
         </div>
         <div class="px-8 py-2 text-center text-gray-800 rounded-lg bg-gray-50">

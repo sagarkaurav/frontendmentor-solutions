@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script>
+
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+  <style>
+    .bg-board {
+      background-image: radial-gradient(hsl(214, 47%, 23%) , hsl(237, 49%, 15%));
+    }
+    .text-dark {
+      color: hsl(229, 25%, 31%);
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+  <script>
+    function gameRules(mode) {
+      if(mode == 'normal') {
+        return  {
+            'rock': ['scissors'],
+            'paper': ['rock'],
+            'scissors': ['paper']
+          }
+      }
+      return  {
+        'rock': ['lizard', 'scissors'],
+        'paper': ['rock', 'spock'],
+        'scissors': ['paper', 'lizard'],
+        'spock': ['scissors', 'rock'],
+        'lizard': ['spock', 'paper']
+      }
+    }
+    function allChoicesForMode(mode) {
+      if (mode == 'normal') {
+        return  ['rock', 'paper', 'scissors'];
+      }
+      return ['rock', 'paper', 'scissors', 'spock', 'lizard'];
+    }
+    function gameBoard() {
+      return {
+        mode: 'hardcore',
+        open: false,
+        userChoice: null,
+        houseChoice: null,
+        gameStatus: null,
+        score: 0,
+        chooseOption: function (option) {
+          let allChoices = allChoicesForMode(this.mode);
+          let rules = gameRules(this.mode);
+          this.userChoice = option;
+          let remChoices = allChoices.filter(c => c != this.userChoice);
+          houseChoice = remChoices[Math.floor(Math.random() * remChoices.length)];
+          this.houseChoice = houseChoice;
+          if (rules[houseChoice].indexOf(this.userChoice) !=-1) {
+            this.gameStatus = 'You loose';
+          }
+          else {
+            this.gameStatus = 'You win';
+            this.score += 1;
+          }
+        }
+      }
+    } 
+  </script>
+  <div x-data="gameBoard()" class="relative min-h-screen text-gray-200 bg-board">
+    <div class="flex flex-col items-center px-4 py-8 md:px-24">
+      <div class="flex justify-between w-full max-w-2xl px-12 py-4 border-2 border-gray-400 rounded-lg">
+        <img x-show="mode=='normal'" src="/images/logo.svg" alt="logo">
+        <img x-show="mode=='hardcore'" src="/images/logo-bonus.svg" alt="logo">
+        <div>
+          <button @click="mode = mode == 'normal' ? 'hardcore': 'normal' ">
+            <span x-show="mode == 'hardcore'">Switch to normal Mode</span>
+            <span x-show="mode == 'normal'">Switch to hardcore Mode</span>
+          </button>
+        </div>
+        <div class="px-8 py-2 text-center text-gray-800 rounded-lg bg-gray-50">
+          <div class="text-sm text-blue-900 uppercase">
+            Score
+          </div>
+          <div x-text="score"  class="font-bold text-7xl text-dark">
+          </div>
+        </div>
+      </div>
+      <div x-show="userChoice != null" class="grid w-full grid-cols-2 mt-8 md:grid-cols-3">
+        <div class="flex flex-col-reverse items-center justify-center md:flex-col">
+          <h1 class="py-12 font-bold text-center text-white uppercase text-md md:text-xl">You Picked</h1>
+          <div x-show="userChoice == 'paper'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient( hsl(230, 89%, 62%), hsl(230, 89%, 65%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-paper.svg" alt="paper">
+            </div>
+          </div>
+          <div x-show="userChoice == 'scissors'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-scissors.svg" alt="scissors">
+            </div>
+          </div>
+          <div x-show="userChoice == 'rock'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-rock.svg" alt="rock">
+            </div>
+          </div>
+          <div x-show="userChoice == 'lizard'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient(hsl(261, 73%, 60%), hsl(261, 72%, 63%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-lizard.svg" alt="rock">
+            </div>
+          </div>
+          <div x-show="userChoice == 'spock'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient(hsl(189, 59%, 53%), hsl(189, 58%, 57%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-spock.svg" alt="rock">
+            </div>
+          </div>
+        </div>
+        <div class="flex-col items-center justify-center hidden text-center mt-14 md:flex">
+          <h3 class="mb-4 text-4xl font-bold text-white uppercase" x-text="gameStatus">You Win</h3>
+          <button @click="userChoice= null"
+            class="px-8 py-2 text-gray-900 bg-white rounded-lg shadow-sm hover:text-red-500">Play again</button>
+        </div>
+        <div class="flex flex-col-reverse items-center justify-center md:flex-col">
+          <h1 class="py-12 font-bold text-center text-white uppercase text-md md:text-xl">The House picked</h1>
+
+          <div x-show="houseChoice == 'paper'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient( hsl(230, 89%, 62%), hsl(230, 89%, 65%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-paper.svg" alt="paper">
+            </div>
+          </div>
+          <div x-show="houseChoice == 'scissors'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-scissors.svg" alt="scissors">
+            </div>
+          </div>
+          <div x-show="houseChoice == 'rock'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-rock.svg" alt="rock">
+            </div>
+          </div>
+          <div x-show="houseChoice == 'lizard'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient(hsl(261, 73%, 60%), hsl(261, 72%, 63%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-lizard.svg" alt="rock">
+            </div>
+          </div>
+          <div x-show="houseChoice == 'spock'" class="flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40" style="background-image: linear-gradient(hsl(189, 59%, 53%), hsl(189, 58%, 57%));">
+            <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+              <img class="w-16 h-16" src="/images/icon-spock.svg" alt="rock">
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col items-center justify-center mt-12 text-center col-span-full md:hidden">
+          <h3 class="mb-4 text-4xl font-bold text-white uppercase" x-text="gameStatus">You Win</h3>
+          <button @click="userChoice= null"
+            class="px-8 py-2 text-gray-900 bg-white rounded-lg shadow-sm hover:text-red-500">Play again</button>
+        </div>
+      </div>
+      <div x-show="userChoice == null && mode == 'normal'" style="background-image: url('/images/bg-triangle.svg');"
+        class="relative w-64 h-64 mt-24 bg-cover md:w-72 md:h-72">
+        <div @click="chooseOption('paper')" class="absolute flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40 -top-12 -left-12" style="background-image: linear-gradient( hsl(230, 89%, 62%), hsl(230, 89%, 65%));">
+          <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+            <img class="w-16 h-16" src="/images/icon-paper.svg" alt="paper">
+          </div>
+        </div>
+        <div @click="chooseOption('scissors')" class="absolute flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40 -top-12 -right-12" style="background-image: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));">
+          <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+            <img class="w-16 h-16" src="/images/icon-scissors.svg" alt="scissors">
+          </div>
+        </div>
+        <div @click="chooseOption('rock')" class="absolute bottom-0 flex items-center justify-center w-32 h-32 bg-yellow-800 rounded-full shadow-lg md:w-40 md:h-40 left-16" style="background-image: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));">
+          <div class="flex items-center justify-center w-24 h-24 bg-white rounded-full shadow-inner md:w-28 md:h-28" >
+            <img class="w-16 h-16" src="/images/icon-rock.svg" alt="rock">
+          </div>
+        </div>
+      </div>
+      <div x-show="userChoice == null && mode == 'hardcore'" style="background-image: url('/images/bg-pentagon.svg');"
+        class="relative w-64 h-64 mt-24 bg-cover md:w-72 md:h-72">
+        <div @click="chooseOption('scissors')" class="absolute flex items-center justify-center w-24 h-24 mr-4 bg-yellow-800 rounded-full shadow-lg -top-12 right-16" style="background-image: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));">
+          <div class="flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-inner " >
+            <img class="w-14 h-14" src="/images/icon-scissors.svg" alt="scissors">
+          </div>
+        </div>
+        <div @click="chooseOption('spock')" class="absolute flex items-center justify-center w-24 h-24 bg-yellow-800 rounded-full shadow-lg -left-8 top-14" style="background-image: linear-gradient(hsl(189, 59%, 53%), hsl(189, 58%, 57%));">
+          <div class="flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-inner " >
+            <img class="w-14 h-14" src="/images/icon-spock.svg" alt="rock">
+          </div>
+        </div>
+        <div @click="chooseOption('paper')" class="absolute flex items-center justify-center w-24 h-24 bg-yellow-800 rounded-full shadow-lg -right-8 top-14" style="background-image: linear-gradient( hsl(230, 89%, 62%), hsl(230, 89%, 65%));">
+          <div class="flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-inner " >
+            <img class="w-14 h-14" src="/images/icon-paper.svg" alt="paper">
+          </div>
+        </div>
+        <div @click="chooseOption('lizard')" class="absolute flex items-center justify-center w-24 h-24 bg-yellow-800 rounded-full shadow-lg -bottom-4 -left-0" style="background-image: linear-gradient(hsl(261, 73%, 60%), hsl(261, 72%, 63%));">
+          <div class="flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-inner " >
+            <img class="w-14 h-14" src="/images/icon-lizard.svg" alt="rock">
+          </div>
+        </div>
+        <div @click="chooseOption('rock')" class="absolute right-0 flex items-center justify-center w-24 h-24 bg-yellow-800 rounded-full shadow-lg -bottom-4" style="background-image: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));">
+          <div class="flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-inner " >
+            <img class="w-14 h-14" src="/images/icon-rock.svg" alt="rock">
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 md:mt-14 md:flex md:justify-end md:w-full">
+        <button @click="open = true" class="px-8 py-2 ml-8 font-semibold border rounded-lg">Rules</button>
+      </div>
+    </div>
+    <div x-show="open" @click="open = false"
+      class="absolute top-0 w-full min-h-screen bg-gray-900 md:flex md:items-center md:justify-center bg-opacity-40">
+      <div class="w-full h-screen p-6 md:h-full md:rounded-md md:max-w-md bg-gray-50">
+        <div class="flex justify-center py-8 md:justify-between md:py-0">
+          <h3 class="text-xl font-bold text-gray-700 uppercase">Rules</h3>
+          <button @click="open = false" class="hidden md:block">
+            <img class="w-4 h-4" src="/images/icon-close.svg" alt="close button">
+          </button>
+        </div>
+        <img x-show="mode == 'normal'" class="h-64 mx-auto mt-8" src="/images/image-rules.svg" alt="rules flow">
+        <img x-show="mode == 'hardcore'" class="mx-auto mt-8 h-72" src="/images/image-rules-bonus.svg" alt="rules flow">
+
+        <div class="flex justify-center py-24 md:hidden">
+          <button @click="open = false">
+            <img class="w-4 h-4" src="/images/icon-close.svg" alt="close button">
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="py-4 text-center">
+      Challenge by <a class="hover:underline" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a class="hover:underline" href="https://www.frontendmentor.io/profile/sagarkaurav">Sagar Kaurav</a>.
+      <a class="hover:underline" href="https://github.com/sagarkaurav">Github</a>
+    </div>
+
+  </div>
+
+
+
+</body>
+
+</html>
